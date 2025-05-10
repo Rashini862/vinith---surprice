@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Surprise for Vinith</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #d0f0ff;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .start-btn {
+      background: #2196f3;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      font-size: 20px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .envelope {
+      width: 200px;
+      height: 120px;
+      background: #2196f3;
+      margin: 30px auto;
+      position: relative;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .envelope:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 60px 100px 0 100px;
+      border-color: #64b5f6 transparent transparent transparent;
+    }
+
+    .letter {
+      background: #fff;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease-in;
+    }
+
+    .lyrics {
+      background: #fffbe6;
+      border: 2px dashed #f48fb1;
+      padding: 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 15px;
+      font-style: italic;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
+    }
+
+    .firework {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: red;
+      border-radius: 50%;
+      animation: explode 1.2s forwards;
+      z-index: 9999;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(5); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .heart {
+      font-size: 24px;
+      color: red;
+      animation: floatHearts 2s infinite ease-in-out;
+    }
+
+    @keyframes floatHearts {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-50px); opacity: 0; }
+    }
+
+    .final-message {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #444;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="container">
+    <h2>Hyy Prince, I'm ur baby doll ..so how are you ? I think you are good ..so today I have little surprise for you my prince ..now you can try it..</h2>
+    
+    <button class="start-btn" onclick="startSurprise()">💙 Start</button>
+
+    <div id="step2" class="hidden">
+      <h2>You are listened to me he he ..that's cute 😊</h2>
+      <div class="envelope" onclick="showLetter()"></div>
+    </div>
+
+    <div id="letterSection" class="hidden">
+      <div class="letter">
+        <p>Hy Prince 💙</p>
+        <p>I just want you to know... you're incredibly special to me. Every moment with you makes my heart smile. Thank you for being *you* 💫</p>
+        <p>This is a little surprise for you.. fastly, click the button!</p>
+        <button class="start-btn" onclick="showLyrics()">Surprise.</button>
+      </div>
+    </div>
+
+    <div id="lyricsSection" class="hidden">
+      <div class="lyrics">
+        <p>"I said, 'No one has to know what we do,' his hands are in my hair<br>
+        His clothes are in my room<br>
+        And his voice is a familiar sound, nothing lasts forever</p>
+        <p>But this is getting good now<br>
+        He's so tall and handsome as hell<br>
+        He's so bad but he does it so well<br>
+        And when we've had our very last kiss<br>
+        My last request is</p>
+        <p>Say you'll remember me standing in a nice dress staring at the sunset<br>
+        Babe<br>
+        Red lips and rosy cheeks say you'll see me again even if it's just in your wildest dreams<br>
+        Oh wildest dreams oh ah, wildest dreams"</p>
+      </div>
+
+      <div class="final-message">
+        <p>This is a question for you 💌</p>
+        <p><strong>What's the meaning of 5201314 ...search it on Google my prince 💙</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bgMusic = document.getElementById('bg-music');
+
+    function startSurprise() {
+      bgMusic.play(); // Play music on interaction
+      document.querySelector('.start-btn').style.display = 'none';
+      document.getElementById('step2').classList.remove('hidden');
+    }
+
+    function showLetter() {
+      document.getElementById('letterSection').classList.remove('hidden');
+      createHearts();
+    }
+
+    function showLyrics() {
+      document.getElementById('lyricsSection').classList.remove('hidden');
+      triggerFireworks();
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.position = "absolute";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = "100vh";
+        heart.innerText = "💖";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+    }
+
+    function triggerFireworks() {
+      for (let i = 0; i < 30; i++) {
+        const firework = document.createElement('div');
+        firework.className = 'firework';
+        firework.style.left = Math.random() * window.innerWidth + 'px';
+        firework.style.top = Math.random() * window.innerHeight + 'px';
+        firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        document.body.appendChild(firework);
+        setTimeout(() => firework.remove(), 1200);
+      }
+    }
+  </script>
+</body>
+</html>
